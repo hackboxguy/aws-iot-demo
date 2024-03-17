@@ -1,5 +1,5 @@
 # AWS-IoT-Demo
-Here is a fun way of experimenting with AWS-IoT on a Commercial-Off-The-Shelf(COTS) hardware running OpenWRT Linux and **aws-iot-device-sdk-cpp-v2** based [aws-iot-pubsub-agent](https://github.com/hackboxguy/aws-iot-pubsub-agent). Custom built linux image for **GL-MT300N-V2** pocket router allows you to configure aws-key/aws-certificate/aws-endpoint/publish-subscribe-topics and custom event-trigger-scripts so that you can see the effect of publish/subscribe messages having physical impact on tangible realworld components like LED-lights/switches as shown in the video below.
+Here is a fun way of experimenting with AWS-IoT on a Commercial-Off-The-Shelf(COTS) hardware running OpenWRT Linux and [aws-iot-device-sdk-cpp-v2](https://github.com/aws/aws-iot-device-sdk-cpp-v2) based [aws-iot-pubsub-agent](https://github.com/hackboxguy/aws-iot-pubsub-agent). Custom built linux image for **GL-MT300N-V2** pocket router allows you to configure aws-key/aws-certificate/aws-endpoint/publish-subscribe-topics and custom event-trigger-scripts so that you can see the effect of publish/subscribe messages having physical impact on tangible realworld components like LED-lights/switches as shown in the video below.
 
 ## Setup diagram for overwriting OEM firmware of GL-MT300N-V2 router
 
