@@ -27,3 +27,7 @@ As shown in the picture above, to repeate the 1st example, you need to prepare t
 ## Demo-Example-2 Preparation and Configuration
 ![Demo-Example-2 Diagram.](/images/demo-example-2.png "Demo-Example-2 Diagram.")
 Demo-Example-2 is same as Demo-Example-1, except **/usr/sbin/led-power.sh** script under **AWS-IoT-->Service Settings-->Subscribe Topic Handler** to be changed to **/usr/sbin/usb-port-power.sh** on all 3 **GL-MT300N-V2** routers (This example uses, USB powered LED's similar to the one found [here](https://www.amazon.de/OSALADI-LED-Lampe-USB-Laptop-Laptop-Tastatur-Nachtlicht/dp/B08MJD4P17)
+
+## Demo-Example-3 Preparation and Configuration
+![Demo-Example-3 Diagram.](/images/demo-example-3.png "Demo-Example-3 Diagram.")
+For this demo you will need a [volume-control-knob](https://www.amazon.de/-/en/VAYDEER-USB-Control-Adjuster-Compatible/dp/B08V4ZB5MV) and [blink(1)](https://blink1.thingm.com/) USB based RGB-LED dongle. As shown in the picture above, 1st pocket router is attached with a volume-control-knob as event publisher and remaining two routers are configured as subscribers and they change the color of the usb-led based on published button event from 1st router.
