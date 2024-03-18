@@ -67,3 +67,10 @@ This demo-example is not shown in the video, but as shown in the picture above, 
 4. AWS-IoT-->Service Settings--> Subscribe Hysterisis : **5**
 
 On 1st unit, when body temperature of usb-temper-sensor crosses 40degrees, Relay on 3rd unit turns ON and when temperature cools down to 35(or below), Relay will turn OFF
+
+## How to build the GL-MT300N-V2's binary for these demo examples
+1. ```git clone --recursive https://github.com/hackboxguy/openwrt-wrapper.git```
+2. ```cd openwrt-wrapper```
+3. ```ln -s ~/openwrt-dl openwrt-dl```
+4. ```./build-openwrt-image.sh -v 00.01 -b gl-mt300nv2-awsiot-demo -o v22.03.3```
+5. ```ls openwrt/bin/targets/ramips/mt76x8/openwrt-ramips-mt76x8-glinet_gl-mt300n-v2-squashfs-sysupgrade.bin```
