@@ -30,4 +30,18 @@ Demo-Example-2 is same as Demo-Example-1, except **/usr/sbin/led-power.sh** scri
 
 ## Demo-Example-3 Preparation and Configuration
 ![Demo-Example-3 Diagram.](/images/demo-example-3.png "Demo-Example-3 Diagram.")
-For this demo you will need a [volume-control-knob](https://www.amazon.de/-/en/VAYDEER-USB-Control-Adjuster-Compatible/dp/B08V4ZB5MV) and [blink(1)](https://blink1.thingm.com/) USB based RGB-LED dongle. As shown in the picture above, 1st pocket router is attached with a volume-control-knob as event publisher and remaining two routers are configured as subscribers and they change the color of the usb-led based on published button event from 1st router.
+For this demo you will need a [volume-control-knob](https://www.amazon.de/-/en/VAYDEER-USB-Control-Adjuster-Compatible/dp/B08V4ZB5MV) and [blink(1)](https://blink1.thingm.com/) USB based RGB-LED dongle. As shown in the picture above, 1st pocket router is attached with a volume-control-knob as event publisher and remaining two routers are configured as subscribers and they change the color of the usb-led based on published button event from 1st router. For this demo, following are the settings of all 3 units set through web-interface.
+
+#### Settings of 1st unit(publisher)
+1. AWS-IoT-->Event Settings-->Key Event MUTE Topic : **test/topic_led**
+2. AWS-IoT-->Event Settings-->Key Event MUTE Message : **{"powerstate": "toggle"}**
+3. AWS-IoT-->Event Settings-->Key Event PREV-SONG Topic : **test/topic_led**
+4. AWS-IoT-->Event Settings-->Key Event PREV-SONG Message : **{"ledstate": "red"}**
+5. AWS-IoT-->Event Settings-->Key Event NEXT-SONG Topic : **test/topic_led**
+6. AWS-IoT-->Event Settings-->Key Event NEXT-SONG Message : **{"ledstate": "green"}**
+7. AWS-IoT-->Event Settings-->Key Event PLAY-PAUSE Topic : **test/topic_led**
+8. AWS-IoT-->Event Settings-->Key Event PLAY-PAUSE Message : **{"ledstate": "blue"}**
+
+#### Settings of 2nd and 3rd units(Subscribers)
+1. AWS-IoT-->Service Settings-->Subscribe Topic : **test/topic_led**
+2. AWS-IoT-->Service Settings-->Subscribe Topic Handler : **/usr/sbin/usb-status-led.sh**
