@@ -30,7 +30,7 @@ Demo-Example-2 is same as Demo-Example-1, except **/usr/sbin/led-power.sh** scri
 
 ## Demo-Example-3 Preparation and Configuration
 ![Demo-Example-3 Diagram.](/images/demo-example-3.png "Demo-Example-3 Diagram.")
-For this demo you will need a [volume-control-knob](https://www.amazon.de/-/en/VAYDEER-USB-Control-Adjuster-Compatible/dp/B08V4ZB5MV) and [blink(1)](https://blink1.thingm.com/) USB based RGB-LED dongle. As shown in the picture above, 1st pocket router is attached with a volume-control-knob as event publisher and remaining two routers are configured as subscribers and they change the color of the usb-led based on published button event from 1st router. For this demo, following are the settings of all 3 units set through web-interface.
+For this demo you will need a [volume-control-knob](https://www.amazon.de/-/en/VAYDEER-USB-Control-Adjuster-Compatible/dp/B08V4ZB5MV) and [blink(1)](https://blink1.thingm.com/) USB based RGB-LED dongle. As shown in the picture above, 1st-pocket-router is attached with a volume-control-knob as event publisher and remaining two routers are configured as subscribers and they change the color of the usb-led based on published button event from 1st router. For this demo, following are the settings of all 3 units set through web-interface.
 
 #### Settings of 1st unit(publisher)
 1. AWS-IoT-->Event Settings-->Key Event MUTE Topic : **test/topic_led**
@@ -45,3 +45,25 @@ For this demo you will need a [volume-control-knob](https://www.amazon.de/-/en/V
 #### Settings of 2nd and 3rd units(Subscribers)
 1. AWS-IoT-->Service Settings-->Subscribe Topic : **test/topic_led**
 2. AWS-IoT-->Service Settings-->Subscribe Topic Handler : **/usr/sbin/usb-status-led.sh**
+
+## Demo-Example-4 Preparation and Configuration
+![Demo-Example-4 Diagram.](/images/demo-example-4.png "Demo-Example-4 Diagram.")
+This demo-example is not shown in the video, but as shown in the picture above, it uses 1st-pocket-router to publish the temperature read from [usb-temp-sensor-dongle](https://www.amazon.de/Docooler-PCsensor-Thermometer-Datenlogger-Recorder/dp/B07BFBSF57) and the 2nd-pocket-router displays the temperature on [digispark-attiny85-usb-to-i2c-display](https://github.com/hackboxguy/brbox/tree/master/sources/firmware/attiny85-i2c-tiny-usb) and the 3rd-pocket-router will operate the [usb-relay](https://www.amazon.de/-/en/ARCELI-LCUS-1-Module-Intelligent-Control/dp/B09MD8MBKC) based on its temperature-threshold and hysterisis setting.
+
+#### Settings of 1st unit(publisher) - every 5 second it reads temp from usb-dongle and publishes to test/topic_temperature using usb-temper-read.sh script, -1 count indicates loop forever
+1. AWS-IoT-->Service Settings-->Publish Topic : **test/topic_temperature**
+2. AWS-IoT-->Service Settings-->Publish Interval Sec : **5**
+3. AWS-IoT-->Service Settings-->Publish Count : **-1**
+4. AWS-IoT-->Service Settings-->Publish Message : **/usr/sbin/usb-temper-read.sh**
+
+#### Settings of 2nd unit(subscriber) - displays received temperature value on to i2c based oled display(ssd1306 128x32)
+1. AWS-IoT-->Service Settings--> Subscribe Topic : **test/topic_temperature**
+2. AWS-IoT-->Service Settings--> Subscribe Topic Handler : **/usr/sbin/display-data.sh**
+
+#### Settings of 3rd unit(subscriber) - compares the published temperature and controls the relay state based on set threshold and hysterisis
+1. AWS-IoT-->Service Settings--> Subscribe Topic : **test/topic_temperature**
+2. AWS-IoT-->Service Settings--> Subscribe Topic Handler : **/usr/sbin/temperature-relay-control.sh**
+3. AWS-IoT-->Service Settings--> Subscribe Threshold : **40**
+4. AWS-IoT-->Service Settings--> Subscribe Hysterisis : **5**
+
+On 1st unit, when body temperature of usb-temper-sensor crosses 40degrees, Relay on 3rd unit turns ON and when temperature cools down to 35(or below), Relay will turn OFF
